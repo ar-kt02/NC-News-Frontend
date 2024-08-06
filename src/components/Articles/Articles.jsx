@@ -27,7 +27,12 @@ const Articles = () => {
   if (errorMsg) return <p className="m-5 text-center">{errorMsg}</p>;
   if (isLoading) return <p className="m-5 text-center">Loading...</p>;
 
-  return <ArticlesCard allArticles={allArticles} />;
+  return (
+    <>
+      <h2 className="ml-5 mt-3 text-5xl font-bold">Articles</h2>
+      <ArticlesCard allArticles={allArticles} />
+    </>
+  );
 };
 
 export default Articles;
