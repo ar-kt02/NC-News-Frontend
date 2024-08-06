@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchArticleById } from "../../api";
 import { useParams } from "react-router-dom";
 import { formatUKDate } from "../../utils/formatUKDate";
+import Comments from "../Comments/Comments";
 
 const Article = () => {
   const { articleId } = useParams();
@@ -43,6 +44,7 @@ const Article = () => {
             {formatUKDate(article.created_at)}
           </p>
           <p className="text-left text-2xl leading-8">{article.body}</p>
+          <Comments />
         </article>
       )}
     </section>
