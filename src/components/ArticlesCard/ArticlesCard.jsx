@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { formatUKDate } from "../../utils/formatUKDate";
 import CommentsIcon from "../../public/comments.svg?react";
-import UpvoteIcon from "../../public/upvote.svg?react";
+import VoteArticle from "../VoteArticle/VoteArticle";
 
 const ArticlesCard = ({ allArticles }) => {
   return (
@@ -20,9 +20,11 @@ const ArticlesCard = ({ allArticles }) => {
             <p className="m-2">{formatUKDate(article.created_at)}</p>
             <h3 className="ml-2 text-2xl font-bold">{article.title}</h3>
             <p className="ml-2">{article.author}</p>
-            <div className="m-2 flex space-x-1.5">
-              <UpvoteIcon className="inline h-5 w-5 cursor-pointer" />
-              <p>{article.votes}</p>
+            <div className="m-2 flex items-center space-x-1.5">
+              <VoteArticle
+                articleId={article.article_id}
+                votes={article.votes}
+              />
               <CommentsIcon className="mr-1 inline h-5 w-5 cursor-pointer" />
               <p>{article.comment_count} comments</p>
             </div>
