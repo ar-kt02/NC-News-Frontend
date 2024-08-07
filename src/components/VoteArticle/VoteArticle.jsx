@@ -55,14 +55,14 @@ const VoteArticle = ({ articleId, votes, setVoteErrorMsg }) => {
         style={{
           fill: fillColour(upClick),
         }}
-        className="h-5 w-5 cursor-pointer"
+        className="h-5 w-5 cursor-pointer hover:fill-green-500"
         onClick={() => handleVoteClick(1, upClick)}
       />
       <DownvoteIcon
         style={{
           fill: fillColour(downClick),
         }}
-        className="h-5 w-5 cursor-pointer"
+        className="h-5 w-5 cursor-pointer hover:fill-green-500"
         onClick={() => handleVoteClick(-1, downClick)}
       />
       <p>{updateVotes}</p>
