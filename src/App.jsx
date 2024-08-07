@@ -5,19 +5,22 @@ import Profile from "./components/Profile/Profile";
 import Login from "./components/Login/Login";
 import Articles from "./components/Articles/Articles";
 import Article from "./components/Article/Article";
+import { AuthUserProvider } from "./contexts/AuthUserContext/AuthUserContext";
 
 function App() {
   return (
-    <main>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/articles/" element={<Articles />}></Route>
-        <Route path="/articles/:articleId" element={<Article />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-      </Routes>
-    </main>
+    <AuthUserProvider>
+      <main>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/articles/" element={<Articles />}></Route>
+          <Route path="/articles/:articleId" element={<Article />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+        </Routes>
+      </main>
+    </AuthUserProvider>
   );
 }
 
