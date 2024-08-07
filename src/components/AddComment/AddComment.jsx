@@ -14,8 +14,8 @@ const AddComment = ({ setArticleComments }) => {
     e.preventDefault();
 
     if (newComment) {
-      setIsAdding(true);
       setErrorMsg("");
+      setIsAdding(true);
 
       postComment(articleId, userInfo.username, newComment)
         .then((response) => {
@@ -61,7 +61,7 @@ const AddComment = ({ setArticleComments }) => {
           ></textarea>
           <button
             type="submit"
-            className={`${isAdding ? "cursor-not-allowed bg-red-300" : "bg-red-600"} absolute bottom-4 right-2 rounded-md bg-red-600 p-2 text-white`}
+            className={`${isAdding && "cursor-not-allowed opacity-35"} absolute bottom-4 right-2 rounded-md bg-red-600 p-2 text-white`}
             disabled={isAdding}
           >
             {isAdding ? "Posting..." : "Post comment"}
