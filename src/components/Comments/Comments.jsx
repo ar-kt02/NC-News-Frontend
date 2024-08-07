@@ -4,6 +4,9 @@ import { fetchCommentsById } from "../../api";
 import { formatUKDate } from "../../utils/formatUKDate";
 import UpvoteIcon from "../../public/upvote.svg?react";
 import DownvoteIcon from "../../public/downvote.svg?react";
+import CommentsIcon from "../../public/comments.svg?react";
+
+import AddComment from "../AddComment/AddComment";
 
 const Comments = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +35,9 @@ const Comments = () => {
 
   return (
     <section className="mt-5">
-      <p className="mb-2 text-xl">Comments: </p>
+      <CommentsIcon className="mb-2 mr-1 inline h-10 w-10" />
+      <p className="mb-2 inline text-xl font-medium">Comments </p>
+      <AddComment setArticleComments={setArticleComments} />
       {articleComments.length === 0 ? (
         <p>Be the first to comment.</p>
       ) : (
@@ -42,7 +47,7 @@ const Comments = () => {
               className="m-2 mb-3 border-b-2 border-l-2 p-2"
               key={comment.comment_id}
             >
-              <p className="inline font-bold">{comment.author}</p>
+              <p className="inline font-medium">{comment.author}</p>
               <p className="inline"> • </p>
               <p className="inline">{formatUKDate(comment.created_at)}</p>
               <p>{comment.body}</p>

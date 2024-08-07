@@ -31,3 +31,20 @@ export const updateVotesArticle = (articleId, incVotes) => {
       return article;
     });
 };
+
+export const fetchUser = (username) => {
+  return api.get(`/users/${username}`).then(({ data: { user } }) => {
+    return user;
+  });
+};
+
+export const postComment = (articleId, username, newComment) => {
+  return api
+    .post(`/articles/${articleId}/comments`, {
+      username: username,
+      body: newComment,
+    })
+    .then(({ data: { comment } }) => {
+      return comment;
+    });
+};
