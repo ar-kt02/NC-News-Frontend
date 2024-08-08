@@ -7,6 +7,7 @@ import DownvoteIcon from "../../public/downvote.svg?react";
 import CommentsIcon from "../../public/comments.svg?react";
 
 import AddComment from "../AddComment/AddComment";
+import RemoveComment from "../RemoveComment/RemoveComment";
 
 const Comments = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,9 +48,18 @@ const Comments = () => {
               className="m-2 mb-3 border-b-2 border-l-2 p-2"
               key={comment.comment_id}
             >
-              <p className="inline font-medium">{comment.author}</p>
-              <p className="inline"> • </p>
-              <p className="inline">{formatUKDate(comment.created_at)}</p>
+              <div className="flex justify-between">
+                <span>
+                  <span className="font-medium">{comment.author}</span>
+                  <span className="mx-1">•</span>
+                  <span>{formatUKDate(comment.created_at)}</span>
+                </span>
+                <RemoveComment
+                  userName={comment.author}
+                  commentId={comment.comment_id}
+                  setArticleComments={setArticleComments}
+                />
+              </div>
               <p>{comment.body}</p>
               <UpvoteIcon className="mr-1 inline h-5 w-5 cursor-pointer align-middle" />
               <p className="inline align-middle">{comment.votes}</p>
