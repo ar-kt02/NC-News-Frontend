@@ -3,7 +3,12 @@ import { formatUKDate } from "../../utils/formatUKDate";
 import CommentsIcon from "../../public/comments.svg?react";
 import VoteArticle from "../VoteArticle/VoteArticle";
 
-const ArticlesCard = ({ allArticles, moreArticles, handleMoreArticles }) => {
+const ArticlesCard = ({
+  allArticles,
+  moreArticles,
+  handleMoreArticles,
+  errorMsg,
+}) => {
   return (
     <>
       <section className="flex grid p-2 sm:grid-cols-2 lg:grid-cols-4">
@@ -50,6 +55,7 @@ const ArticlesCard = ({ allArticles, moreArticles, handleMoreArticles }) => {
         ) : (
           <p className="text-md">No more articles to show.</p>
         )}
+        {errorMsg && <p className="text-center text-red-600">{errorMsg}</p>}
       </div>
     </>
   );

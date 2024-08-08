@@ -32,12 +32,14 @@ const Articles = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        setAllArticles([]);
         setIsLoading(false);
 
-        const statusCode = err.response.status;
-        if (statusCode === 404)
-          setErrorMsg("Failed to fetch articles. Try again later.");
+        setErrorMsg("Failed to fetch articles. Try again later.");
+
+        const errMsg = err.response.data.msg;
+        if (errMsg) {
+          setErrorMsg(errMsg);
+        }
       });
   }, [currentPage]);
 
@@ -47,7 +49,6 @@ const Articles = () => {
     }
   };
 
-  if (errorMsg) return <p className="m-5 text-center">{errorMsg}</p>;
   if (isLoading && !allArticles.length)
     return <p className="m-5 text-center">Loading...</p>;
 
@@ -63,6 +64,7 @@ const Articles = () => {
         allArticles={allArticles}
         moreArticles={moreArticles}
         handleMoreArticles={handleMoreArticles}
+        errorMsg={errorMsg}
       />
     </>
   );
