@@ -53,7 +53,7 @@ const ArticlesCard = ({
             More Articles
           </button>
         ) : (
-          <p className="text-md">No more articles to show.</p>
+          <p className="text-md">{!errorMsg && "No more articles to show."}</p>
         )}
         {errorMsg && <p className="text-center text-red-600">{errorMsg}</p>}
       </div>
