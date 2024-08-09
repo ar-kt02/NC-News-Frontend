@@ -5,9 +5,10 @@ import VoteArticle from "../VoteArticle/VoteArticle";
 
 const ArticlesCard = ({
   allArticles,
-  moreArticles,
-  handleMoreArticles,
   errorMsg,
+  handleMoreArticles,
+  countPages,
+  page,
 }) => {
   return (
     <>
@@ -45,18 +46,22 @@ const ArticlesCard = ({
           ))}
       </section>
       <div className="mb-5 flex justify-center">
-        {moreArticles ? (
-          <button
-            onClick={handleMoreArticles}
-            className="rounded bg-gray-700 p-2 text-white hover:bg-sky-700"
-          >
-            More Articles
-          </button>
-        ) : (
-          <p className="text-md">{!errorMsg && "No more articles to show."}</p>
-        )}
-        {errorMsg && <p className="text-center text-red-600">{errorMsg}</p>}
+        <button
+          className={`m-1 rounded-lg border px-4 py-2 text-black hover:bg-[#f1f1f1] ${page === 1 ? "cursor-not-allowed opacity-50" : ""}`}
+          onClick={() => handleMoreArticles(page - 1)}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <button
+          className={`m-1 rounded-lg border px-4 py-2 text-black hover:bg-[#f1f1f1] ${page >= countPages ? "cursor-not-allowed opacity-50" : ""}`}
+          onClick={() => handleMoreArticles(page + 1)}
+          disabled={page >= countPages}
+        >
+          Next
+        </button>
       </div>
+      {errorMsg && <p className="text-center text-red-600">{errorMsg}</p>}
     </>
   );
 };
