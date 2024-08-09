@@ -2,18 +2,23 @@ import { fetchArticles } from "../../api";
 import { useEffect, useState, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TopicsContext } from "../../contexts/TopicsContext/TopicsContext";
+import { updateQueryParams } from "../../utils/updateQueryParams";
 
 import ArticlesCard from "../ArticlesCard/ArticlesCard";
+import SortArticles from "../SortArticles/SortArticles";
 
 const Articles = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [allArticles, setAllArticles] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [moreArticles, setMoreArticles] = useState(false);
+  const [countPages, setCountPages] = useState(1);
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const topic = searchParams.get("topic");
+  const page = Number(searchParams.get("p")) || 1;
+  const sort = searchParams.get("sort_by") || undefined;
+  const order = searchParams.get("order") || undefined;
+
   const { allTopics } = useContext(TopicsContext);
 
   const checkTopicExists = allTopics.find(
@@ -21,14 +26,15 @@ const Articles = () => {
   );
 
   useEffect(() => {
+    setAllArticles([]);
     setIsLoading(true);
-    fetchArticles(currentPage, topic)
-      .then((response) => {
-        setMoreArticles(true);
-        setErrorMsg("");
-        if (response.length < 10) setMoreArticles(false);
 
-        setAllArticles((priorArticles) => [...priorArticles, ...response]);
+    fetchArticles(page, topic, sort, order)
+      .then(({ articles, total_count }) => {
+        setErrorMsg("");
+
+        setCountPages(Math.ceil(total_count / 10));
+        setAllArticles(articles);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -41,12 +47,27 @@ const Articles = () => {
           setErrorMsg(errMsg);
         }
       });
-  }, [currentPage]);
+  }, [page, topic, sort, order]);
 
-  const handleMoreArticles = () => {
-    if (moreArticles) {
-      setCurrentPage((priorPage) => priorPage + 1);
-    }
+  const handleMoreArticles = (latestPage) => {
+    const newParams = [
+      ["p", latestPage > 1 ? latestPage : undefined],
+      ["topic", topic ? topic : undefined],
+    ];
+
+    updateQueryParams(newParams, searchParams, setSearchParams);
+  };
+
+  const handleSortChange = (selectedSort) => {
+    const newParams = [["sort_by", selectedSort]];
+
+    updateQueryParams(newParams, searchParams, setSearchParams);
+  };
+
+  const handleOrderChange = (selectedOrder) => {
+    const newParams = [["order", selectedOrder]];
+
+    updateQueryParams(newParams, searchParams, setSearchParams);
   };
 
   if (isLoading && !allArticles.length)
@@ -60,11 +81,18 @@ const Articles = () => {
       <p className="ml-5 mt-1 text-lg text-gray-600">
         {checkTopicExists && checkTopicExists.description}
       </p>
+      <SortArticles
+        order={order}
+        sort={sort}
+        handleSortChange={handleSortChange}
+        handleOrderChange={handleOrderChange}
+      />
       <ArticlesCard
         allArticles={allArticles}
-        moreArticles={moreArticles}
-        handleMoreArticles={handleMoreArticles}
         errorMsg={errorMsg}
+        handleMoreArticles={handleMoreArticles}
+        countPages={countPages}
+        page={page}
       />
     </>
   );
