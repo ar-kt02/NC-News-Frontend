@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { formatUKDate } from "../../utils/formatUKDate";
 import CommentsIcon from "../../public/comments.svg?react";
 import VoteArticle from "../VoteArticle/VoteArticle";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
 
 const ArticlesCard = ({
   allArticles,
@@ -36,32 +39,35 @@ const ArticlesCard = ({
                 <p>{article.comment_count} comments</p>
               </div>
               <p className="ml-2">#{article.topic}</p>
-              <Link
-                to={`/articles/${article.article_id}`}
-                className="mb-1 mr-2 mt-auto cursor-pointer text-right"
-              >
-                Read more...
-              </Link>
+              <div className="mb-2 mr-2 mt-auto flex justify-end">
+                <Link
+                  to={`/articles/${article.article_id}`}
+                  className="cursor-pointer rounded-lg border bg-black px-4 py-2 text-white hover:bg-gray-700"
+                >
+                  Read more <ReadMoreIcon fontSize="medium" />
+                </Link>
+              </div>
             </article>
           ))}
       </section>
       <div className="mb-5 flex justify-center">
         <button
-          className={`m-1 rounded-lg border px-4 py-2 text-black hover:bg-[#f1f1f1] ${page === 1 ? "cursor-not-allowed opacity-50" : ""}`}
+          className={`m-1 flex items-center gap-2 rounded-lg border px-4 py-2 text-black hover:bg-[#f1f1f1] ${page === 1 ? "cursor-not-allowed opacity-50" : ""}`}
           onClick={() => handleMoreArticles(page - 1)}
           disabled={page === 1}
         >
+          <ArrowBackIcon fontSize="medium" />
           Previous
         </button>
         <button
-          className={`m-1 rounded-lg border px-4 py-2 text-black hover:bg-[#f1f1f1] ${page >= countPages ? "cursor-not-allowed opacity-50" : ""}`}
+          className={`m-1 flex items-center gap-2 rounded-lg border px-4 py-2 text-black hover:bg-[#f1f1f1] ${page >= countPages ? "cursor-not-allowed opacity-50" : ""}`}
           onClick={() => handleMoreArticles(page + 1)}
           disabled={page >= countPages}
         >
           Next
+          <ArrowForwardIcon fontSize="medium" />
         </button>
       </div>
-      {errorMsg && <p className="text-center text-red-600">{errorMsg}</p>}
     </>
   );
 };
