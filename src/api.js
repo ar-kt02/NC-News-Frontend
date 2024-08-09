@@ -4,8 +4,8 @@ const api = axios.create({
   baseURL: "https://nc-news-id0p.onrender.com/api",
 });
 
-export const fetchArticles = (page, topic, sort_by, order) => {
-  const params = { p: page, topic, sort_by, order };
+export const fetchArticles = (page, topic, sort_by, order, limit = 12) => {
+  const params = { p: page, topic, sort_by, order, limit };
   return api
     .get("/articles", { params })
     .then(({ data: { articles, total_count } }) => {

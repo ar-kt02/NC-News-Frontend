@@ -7,6 +7,9 @@ import { updateQueryParams } from "../../utils/updateQueryParams";
 import ArticlesCard from "../ArticlesCard/ArticlesCard";
 import SortArticles from "../SortArticles/SortArticles";
 
+import Loading from "../../pages/Loading";
+import ArticleNotFound from "../../pages/ArticleNotFound.jsx";
+
 const Articles = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [allArticles, setAllArticles] = useState([]);
@@ -33,7 +36,7 @@ const Articles = () => {
       .then(({ articles, total_count }) => {
         setErrorMsg("");
 
-        setCountPages(Math.ceil(total_count / 10));
+        setCountPages(Math.ceil(total_count / 12));
         setAllArticles(articles);
         setIsLoading(false);
       })
@@ -70,8 +73,8 @@ const Articles = () => {
     updateQueryParams(newParams, searchParams, setSearchParams);
   };
 
-  if (isLoading && !allArticles.length)
-    return <p className="m-5 text-center">Loading...</p>;
+  if (isLoading) return <Loading />;
+  if (!allArticles.length) return <ArticleNotFound />;
 
   return (
     <>
