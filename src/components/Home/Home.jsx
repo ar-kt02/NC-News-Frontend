@@ -2,11 +2,9 @@ import Topics from "../Topics/Topics";
 
 const Home = () => {
   return (
-    <section className="ml-5 mt-3 flex justify-between">
+    <section className="ml-5 mt-3 flex flex-row items-center space-x-2 space-y-2">
       <h2 className="text-5xl font-bold">Home</h2>
-      <div className="mr-3 w-auto rounded-md border bg-gray-200 p-5">
-        <Topics />
-      </div>
+      <Topics />
     </section>
   );
 };

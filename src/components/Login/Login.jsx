@@ -11,6 +11,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUsernameInput = (e) => {
+    setErrorMsg("");
     setUsername(e.target.value);
   };
 
@@ -63,28 +64,31 @@ const Login = () => {
           value={username}
           onChange={handleUsernameInput}
           required
-          className="rounded-md border border-red-100 p-2"
+          className="rounded-md border border-[#172554] p-2 focus:outline-blue-900"
           autoComplete=""
         ></input>
         <input
           type="password"
           placeholder="Enter password..."
-          className="rounded-md border border-red-100 p-2"
+          className="rounded-md border border-[#172554] p-2 focus:outline-blue-900"
           autoComplete=""
         />
 
-        <button className="rounded-md bg-red-600 py-1 text-white" type="submit">
+        <button
+          className="rounded-md bg-[#172554] py-1 text-white hover:opacity-90"
+          type="submit"
+        >
           Log In
         </button>
         <button
-          className="rounded-md bg-red-600 py-1 text-white"
+          className="rounded-md bg-[#172554] py-1 text-white hover:opacity-90"
           type="button"
           onClick={handleTestLogin}
         >
           Default User
         </button>
       </form>
-      {isLoading && <p className="mt-2">Loading...</p>}
+      {isLoading && <p className="mt-2">Logging in...</p>}
       {errorMsg && <p className="mt-2 text-red-600">{errorMsg}.</p>}
     </section>
   );
