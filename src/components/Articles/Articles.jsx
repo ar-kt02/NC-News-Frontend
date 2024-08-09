@@ -43,7 +43,7 @@ const Articles = () => {
       .catch((err) => {
         setIsLoading(false);
 
-        setErrorMsg("Failed to fetch articles. Try again later.");
+        setErrorMsg("Failed to fetch articles");
 
         const errMsg = err.response.data.msg;
         if (errMsg) {
@@ -74,7 +74,7 @@ const Articles = () => {
   };
 
   if (isLoading) return <Loading />;
-  if (!allArticles.length) return <ArticleNotFound />;
+  if (!allArticles.length) return <ArticleNotFound errorMsg={errorMsg} />;
 
   return (
     <>
