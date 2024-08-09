@@ -50,7 +50,9 @@ const Comments = () => {
             >
               <div className="flex justify-between">
                 <span>
-                  <span className="font-medium">{comment.author}</span>
+                  <span className="font-medium text-gray-800">
+                    {comment.author}
+                  </span>
                   <span className="mx-1">•</span>
                   <span>{formatUKDate(comment.created_at)}</span>
                 </span>

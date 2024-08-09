@@ -62,7 +62,7 @@ const AddComment = ({ setArticleComments }) => {
           ></textarea>
           <button
             type="submit"
-            className={`${isAdding ? "cursor-not-allowed opacity-35" : "hover:opacity-80"} absolute bottom-4 right-2 rounded-md bg-red-600 p-2 text-white`}
+            className={`${isAdding ? "cursor-not-allowed opacity-35" : "hover:opacity-80"} absolute bottom-4 right-2 rounded-md bg-[#172554] p-2 text-white`}
             disabled={isAdding}
           >
             {isAdding ? "Posting..." : "Post comment"}
