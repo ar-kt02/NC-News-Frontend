@@ -63,7 +63,7 @@ const Article = () => {
             </p>
           </div>
           <p className="mb-1 text-red-700">{voteErrorMsg}</p>
-          <p className="text-left text-xl leading-8">{article.body}</p>
+          <p className="text-left text-xl leading-7">{article.body}</p>
           <Comments />
         </article>
       )}

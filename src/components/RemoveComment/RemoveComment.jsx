@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthUserContext } from "../../contexts/AuthUserContext/AuthUserContext";
 import { deleteComment } from "../../api";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const RemoveComment = ({ userName, commentId, setArticleComments }) => {
   const { userInfo } = useContext(AuthUserContext);
@@ -45,11 +46,11 @@ const RemoveComment = ({ userName, commentId, setArticleComments }) => {
         {userInfo && userInfo.username === userName && (
           <button
             type="button"
-            className={`${isDeleting ? "cursor-not-allowed opacity-35" : "hover:opacity-80"} w-20 rounded-md bg-gray-900 text-white`}
+            className={`${isDeleting ? "cursor-not-allowed opacity-35" : "hover:opacity-80"} text-[#172554]`}
             onClick={handleDeleteClick}
             disabled={isDeleting}
           >
-            {isDeleting ? "Deleting..." : "Delete"}
+            <ClearIcon fontSize="small" />
           </button>
         )}
       </div>

@@ -1,7 +1,7 @@
 const TopicsCard = ({ allTopics, handleTopicClick, isLoading, errorMsg }) => {
   return (
     <>
-      <h3 className="text-xl font-semibold">Topics:</h3>
+      <h3 className="text-md font-medium">Topics:</h3>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -9,9 +9,9 @@ const TopicsCard = ({ allTopics, handleTopicClick, isLoading, errorMsg }) => {
           <p
             key={index}
             onClick={() => handleTopicClick(topic.slug)}
-            className="cursor-pointer hover:underline"
+            className="cursor-pointer text-sm hover:underline"
           >
-            {topic.slug}
+            {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
           </p>
         ))
       )}
