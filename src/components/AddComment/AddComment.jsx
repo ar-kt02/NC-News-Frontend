@@ -58,6 +58,7 @@ const AddComment = ({ setArticleComments }) => {
             className="w-full resize-none rounded-md border p-7"
             value={newComment}
             onChange={handleCommentInput}
+            required
           ></textarea>
           <button
             type="submit"
