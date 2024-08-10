@@ -12,7 +12,7 @@ import ArticleNotFound from "../../pages/ArticleNotFound.jsx";
 
 const Articles = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [allArticles, setAllArticles] = useState([]);
+  const [allArticles, setAllArticles] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [countPages, setCountPages] = useState(1);
 
@@ -29,7 +29,6 @@ const Articles = () => {
   );
 
   useEffect(() => {
-    setAllArticles([]);
     setIsLoading(true);
 
     fetchArticles(page, topic, sort, order)
@@ -42,7 +41,6 @@ const Articles = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-
         setErrorMsg("Failed to fetch articles");
 
         const errMsg = err.response.data.msg;
@@ -74,7 +72,11 @@ const Articles = () => {
   };
 
   if (isLoading) return <Loading />;
-  if (!allArticles.length) return <ArticleNotFound errorMsg={errorMsg} />;
+  if (
+    errorMsg ||
+    (allArticles !== null && !allArticles.length && !checkTopicExists)
+  )
+    return <ArticleNotFound errorMsg={errorMsg} />;
 
   return (
     <>
@@ -92,7 +94,6 @@ const Articles = () => {
       />
       <ArticlesCard
         allArticles={allArticles}
-        errorMsg={errorMsg}
         handleMoreArticles={handleMoreArticles}
         countPages={countPages}
         page={page}
