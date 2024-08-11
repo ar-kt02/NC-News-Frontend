@@ -8,7 +8,6 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore";
 
 const ArticlesCard = ({
   allArticles,
-  errorMsg,
   handleMoreArticles,
   countPages,
   page,

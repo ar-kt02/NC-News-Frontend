@@ -20,7 +20,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="flex flex-row items-center justify-between border px-6 py-4">
+    <header className="position: fixed top-0 flex w-full flex-row items-center justify-between border bg-white px-6 py-4">
       <NavLink to="/" className="text-4xl font-bold">
         <h1>N+</h1>
       </NavLink>

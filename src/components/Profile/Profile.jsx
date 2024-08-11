@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthUserContext } from "../../contexts/AuthUserContext/AuthUserContext";
 import { useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Profile = () => {
   const { userInfo, logoutUser } = useContext(AuthUserContext);
@@ -23,18 +24,22 @@ const Profile = () => {
     <section className="mt-5 flex flex-col items-center justify-center space-y-3 text-center">
       {userInfo && (
         <>
-          <div className="flex justify-end rounded-lg bg-[#172554] px-3 py-1 text-white hover:opacity-90">
-            <button type="submit" onClick={handleLogOut}>
+          <div className="flex flex-col items-center space-y-2 rounded border px-20 py-5">
+            <button
+              className="flex items-center gap-1 text-[17px] text-gray-700 hover:text-gray-900 hover:underline"
+              type="submit"
+              onClick={handleLogOut}
+            >
               Log Out
+              <LogoutIcon fontSize="small" />
             </button>
-          </div>
-          <div className="flex flex-col items-center justify-center space-y-2 rounded border px-20 py-5">
-            <p className="font-medium">Hello, {userInfo.name}!</p>
+            <p className="text-6xl font-light">{userInfo.name}</p>
             <img
               className="w-20 rounded-full border"
               src={userInfo.avatar_url}
               alt="Avatar"
             />
+            <p className="text-gray-700">@{userInfo.username}</p>
           </div>
         </>
       )}
