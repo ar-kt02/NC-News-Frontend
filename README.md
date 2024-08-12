@@ -1,6 +1,6 @@
 # NC-News - Social News Platform
 
-NC-News is designed as a responsive social news platform, allowing users to browse articles and engange through posting or deleting comments, as well as a likes or disliking content. It also featuers a login system, article sorting, and topic filtering.
+NC-News is designed as a responsive social news platform, allowing users to browse articles and engange through posting or deleting comments, as well as likes or disliking content. It also featuers a login system, article sorting, and topic filtering.
 
 **Access the live application here**: [**NC-News**](https://katz-nc-news.netlify.app/articles)
 
