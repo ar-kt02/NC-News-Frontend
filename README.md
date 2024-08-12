@@ -26,7 +26,7 @@ The back-end is implemented using [**NC-News API**](https://github.com/ar-kt02/n
 git clone https://github.com/ar-kt02/NC-News-Frontend.git
 ```
 
-## 2. Navigate to project directory:
+### 2. Navigate to project directory:
 
 ```
 cd NC-News-Frontend
